@@ -1,6 +1,5 @@
 # Dynamic Programming practice
 
-FibMemo = {0:1, 1:1}
 def Fib_top_down(n, fibmemo=None):
     print("Calculate for n: %s, FibMemo= %s " % (n, fibmemo))
     if fibmemo is None:
