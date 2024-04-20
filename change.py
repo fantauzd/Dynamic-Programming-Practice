@@ -30,8 +30,9 @@ def makechange(coins, amount, countmemo={}):
     # base case is when we have no amount left to return
     if(amount == 0): return 0
     result = amount+1 #some arbitary huge number that cannot be the answer
-    if result in countmemo:
-        result = countmemo[amount]
+    # if we already know the best solution fpr amount then we save time using the memo
+    if amount in countmemo:
+        return countmemo[amount]
     else:
     # for each coin denomination
         for i in range(len(coins)):
@@ -39,8 +40,10 @@ def makechange(coins, amount, countmemo={}):
             if(coins[i] <= amount):
                 # find the minimum number of coins to get that amount by checking the
                 # branches for the minimum amount of steps to get each amount after subtracting one coin
-                result = min(result, makechangeBF(coins, amount-coins[i]) + 1)
-                countmemo[amount-coins[i]] = result
+                result = min(result, makechange(coins, amount-coins[i]) + 1)
+                # when a better solution is found we add it to the memo
+                if amount not in countmemo or result < countmemo[amount]:
+                    countmemo[amount] = result
     return result
 
 if __name__ == "__main__":
