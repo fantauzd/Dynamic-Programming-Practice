@@ -6,7 +6,6 @@ def Fib_top_down(n, fibmemo=None):
         fibmemo = {0:1, 1:1}
     if n not in fibmemo:
         fibmemo[n] = Fib_top_down(n-1, fibmemo) + Fib_top_down(n-2, fibmemo)
-
     print("Returning Answer for n: %s" %(n))
     return fibmemo[n]
 
