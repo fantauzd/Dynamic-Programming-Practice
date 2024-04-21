@@ -7,23 +7,20 @@ def lcs(str1, str2):
     return lcs_helper(str1, str2, len(str1)-1, len(str2)-1, cache)
 
 def lcs_helper(str1, str2, p1, p2, cache):
-    if cache[p1][p2] != 0:
-        return cache[p1][p2]
-
-    if p1 < 0 or p2 < 0:
+    if p1 == 0 or p2 == 0:
         return 0
 
-    if p1 == 0 or p2 == 0:
-        cache[p1][p2] = 0
+    if cache[p2][p1] != 0:
+        return cache[p2][p1]
 
     elif str1[p1] == str2[p2]:
-        cache[p1][p2] = 1 + lcs_helper(str1, str2, p1-1, p2-1, cache)
-        return cache[p1][p2]
+        cache[p2][p1] = 1 + lcs_helper(str1, str2, p1-1, p2-1, cache)
+        return cache[p2][p1]
 
     else:
-        cache[p1][p2] = max(lcs_helper(str1, str2, p1-1, p2, cache),
+        cache[p2][p1] = max(lcs_helper(str1, str2, p1-1, p2, cache),
                    lcs_helper(str1, str2, p1, p2-1, cache))
-        return cache[p1][p2]
+        return cache[p2][p1]
 
 
 def lcs_bottomup(str1, str2):
@@ -43,4 +40,5 @@ def lcs_bottomup(str1, str2):
 
 
 if __name__ == "__main__":
-    print(lcs("bald", "albd"))
+    print(lcs("bac", "abcat"))
+    print(lcs_bottomup("bac", "abcat"))
