@@ -80,21 +80,21 @@ def makechange_topdown_helper( coins, amount, countmemo):
 
 def makechange_bottomup(coins, amount):
     # initialize our countmemo
-    countmemo = [0] * (amount + 1)
+    count_table = [0] * (amount + 1)
 
     for i in range(1, amount+1):
         # in the worst case we can get the amount by adding another coin
-        countmemo[i] = countmemo[i-1] + 1
+        count_table[i] = count_table[i-1] + 1
         # look at larger coins that are less than our amount to find any better solution
         for coin in coins:
 
             if coin <= i:
-                result = countmemo[i-coin]
+                result = count_table[i-coin]
 
-            if result < countmemo[i]:
-                countmemo[i] = result + 1
+            if result < count_table[i]:
+                count_table[i] = result + 1
 
-    return countmemo[amount]
+    return count_table[amount]
 
 
 
