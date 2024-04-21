@@ -42,3 +42,4 @@ def lcs_bottomup(str1, str2):
 if __name__ == "__main__":
     print(lcs("bac", "abcat"))
     print(lcs_bottomup("bac", "abcat"))
+    # why do we have one off errror?
