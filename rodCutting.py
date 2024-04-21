@@ -9,19 +9,26 @@
 # of prices provided. What is the optimal amount of revenue
 # we can get out of the rod given length, n and prices?
 
-def rodCutting_naive(n, prices):
+def rodCutting_topdown(n, prices):
     """
     A naive recursive solution to the rod cutting problem.
     :param n: The length of the rod
     :param prices: A list of prices for lengths like [1,5,10]
     :return: The optimal price for the rod after any cuts.
     """
-    if n == 1:
-        return prices[0]
-    max_val = 0
+    vals = [0] * n
+    return rodCutting_topdown_helper(n, prices, vals)
+
+def rodCutting_topdown_helper(n, prices, vals):
+    if n <= 0:
+        return 0
+
+    if vals[n-1] != 0:
+        return vals[n-1]
+
     for i in range(1, n+1):
-        max_val = max(max_val, rodCutting_naive(n-i, prices) + prices[i-1])
-    return max_val
+        vals[n-1] = max(vals[n-1], rodCutting_topdown_helper(n-i, prices, vals) + prices[i-1])
+    return vals[n-1]
 
 if __name__ == "__main__":
-    print(rodCutting_naive(4, [1,5,8,9,10]))
+    print(rodCutting_topdown(4, [1,5,8,9,10]))
