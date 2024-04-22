@@ -24,7 +24,7 @@ def lcs_helper(str1, str2, p1, p2, cache):
 
 
 def lcs_bottomup(str1, str2):
-    m, n = len(str1)-1, len(str2)-1
+    m, n = len(str1), len(str2)
     cache = [[0 for x in range(n + 1)] for x in range(m + 1)]
 
     for i in range(m + 1):
