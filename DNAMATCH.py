@@ -2,6 +2,8 @@
 # fantauzd
 # 4/22/2024
 # CS 325, Assignment 3
+# Sources used for reference:
+# CS 325 Exploration 3.3 https://canvas.oregonstate.edu/courses/1983215/pages/exploration-3-dot-3-dynamic-programming-longest-common-subsequence-problem?module_item_id=24301132
 
 def dna_match_topdown(DNA1, DNA2):
     """
