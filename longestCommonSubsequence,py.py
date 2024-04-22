@@ -2,24 +2,25 @@
 
 
 
-def lcs(str1, str2):
-    cache = [[0 for x in range(len(str1))] for x in range(len(str2))]
-    return lcs_helper(str1, str2, len(str1)-1, len(str2)-1, cache)
+def dna_match_topdown(DNA1, DNA2):
+    cache = [[0 for x in range(len(DNA1)+1)] for x in range(len(DNA2)+1)]
+    return dna_match_topdown_helper(DNA1, DNA2, len(DNA1), len(DNA2), cache)
 
-def lcs_helper(str1, str2, p1, p2, cache):
+def dna_match_topdown_helper(DNA1, DNA2, p1, p2, cache):
     if p1 == 0 or p2 == 0:
         return 0
 
     if cache[p2][p1] != 0:
         return cache[p2][p1]
 
-    elif str1[p1] == str2[p2]:
-        cache[p2][p1] = 1 + lcs_helper(str1, str2, p1-1, p2-1, cache)
+    elif DNA1[p1-1] == DNA2[p2-1]:
+        cache[p2][p1] = 1 + dna_match_topdown_helper(DNA1, DNA2, p1-1, p2-1, cache)
         return cache[p2][p1]
 
     else:
-        cache[p2][p1] = max(lcs_helper(str1, str2, p1-1, p2, cache),
-                   lcs_helper(str1, str2, p1, p2-1, cache))
+        cache[p2][p1] = max(dna_match_topdown_helper(DNA1, DNA2, p1-1, p2, cache),
+                            dna_match_topdown_helper(DNA1, DNA2, p1, p2-1, cache))
+
         return cache[p2][p1]
 
 
@@ -40,6 +41,5 @@ def lcs_bottomup(str1, str2):
 
 
 if __name__ == "__main__":
-    print(lcs("bac", "abcat"))
     print(lcs_bottomup("bac", "abcat"))
     # why do we have one off errror?
