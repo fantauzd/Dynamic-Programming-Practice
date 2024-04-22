@@ -1,6 +1,6 @@
 def dna_match_topdown(DNA1, DNA2):
-    cache = [[0 for x in range(len(DNA1))] for x in range(len(DNA2))]
-    return dna_match_topdown_helper(DNA1, DNA2, len(DNA1) - 1, len(DNA2) - 1, cache)
+    cache = [[0 for x in range(len(DNA1)+1)] for x in range(len(DNA2)+1)]
+    return dna_match_topdown_helper(DNA1, DNA2, len(DNA1), len(DNA2), cache)
 
 def dna_match_topdown_helper(DNA1, DNA2, p1, p2, cache):
     if p1 == 0 or p2 == 0:
@@ -9,13 +9,13 @@ def dna_match_topdown_helper(DNA1, DNA2, p1, p2, cache):
     if cache[p2][p1] != 0:
         return cache[p2][p1]
 
-    elif DNA1[p1] == DNA2[p2]:
+    elif DNA1[p1-1] == DNA2[p2-1]:
         cache[p2][p1] = 1 + dna_match_topdown_helper(DNA1, DNA2, p1-1, p2-1, cache)
         return cache[p2][p1]
 
     else:
         cache[p2][p1] = max(dna_match_topdown_helper(DNA1, DNA2, p1-1, p2, cache),
-                   dna_match_topdown_helper(DNA1, DNA2, p1, p2-1, cache))
+                            dna_match_topdown_helper(DNA1, DNA2, p1, p2-1, cache))
 
         return cache[p2][p1]
 
@@ -35,5 +35,5 @@ def dna_match_bottomup(DNA1, DNA2):
     return cache[m][n]
 
 if __name__ == "__main__":
-    print(dna_match_topdown('ATAGTTCCGTCAAA', 'GTGTTCCCGTCAAA'))
-    print(dna_match_bottomup('ATAGTTCCGTCAAA', 'GTGTTCCCGTCAAA'))
+    print(dna_match_topdown('ATAGTTCCGTCAAA', 'ATAGTTCCGTCAAA'))
+    print(dna_match_bottomup('ATAGTTCCGTCAAA', 'ATAGTTCCGTCAAA'))
