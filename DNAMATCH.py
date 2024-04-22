@@ -35,7 +35,7 @@ def dna_match_topdown_helper(DNA1, DNA2, p1, p2, cache):
         cache[p2][p1] = 1 + dna_match_topdown_helper(DNA1, DNA2, p1-1, p2-1, cache)
         return cache[p2][p1]
     # if we did not match letters than we decrement the letter we are checking in both strings
-    # and then store whichever option yields longest alignment
+    # and then store the option that yields longest alignment
     else:
         # store the result
         cache[p2][p1] = max(dna_match_topdown_helper(DNA1, DNA2, p1-1, p2, cache),
