@@ -6,6 +6,14 @@
 
 
 def unbound_knapsack(W, n, weights, values):
+    """
+    Solves the unbounded knapsack problem in which there are infine amounts of each item.
+    :param W: int, the max weight of the sack
+    :param n: int, the number of different items to choose from
+    :param weights: an array of weight of each item
+    :param values: an array of values of each item, index corresponds to weights array
+    :return: the max value that can be fit into the knapsack
+    """
     dp = [0]*(W+1)
 
     for x in range(1, W+1):
