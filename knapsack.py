@@ -1,3 +1,10 @@
+# Suppose you woke up on a mysterious island and there are numerous valuable items
+# on the island. You have a knapsack (a bag) with you which you can use to take back
+# these items with you. But, the problem is there is a limit to the weight that your
+# knapsack can carry. So, our questions would be what is the best way to cram items
+# into our knapsack to maximize the overall value of items that you can carry back with you.
+
+
 def unbound_knapsack(W, n, weights, values):
     dp = [0]*(W+1)
 
