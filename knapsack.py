@@ -10,5 +10,5 @@ def unbound_knapsack(W, n, weights, values):
 
     return dp[W]
 
-
-print(unbound_knapsack(10,5,[4,9,3,5,7], [10,25,13,20,8]))
+if __name__ == "__main__":
+    print(unbound_knapsack(10,5,[4,9,3,5,7], [10,25,13,20,8]))
