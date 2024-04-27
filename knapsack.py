@@ -50,3 +50,4 @@ def bound_knapsack(W, n, weights, values):
 
 if __name__ == "__main__":
     print(unbound_knapsack(10,5,[4,9,3,5,7], [10,25,13,20,8]))
+    print(bound_knapsack(10, 5, [4, 9, 3, 5, 7], [10, 25, 13, 20, 8]))
