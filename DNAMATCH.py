@@ -45,6 +45,9 @@ def dna_match_topdown_helper(DNA1, DNA2, p1, p2, cache):
         return cache[p2][p1]
 
 def dna_match_bottomup(DNA1, DNA2):
+    """
+    finds an optimal solution to the problem instead of the length of the optimal solution
+    """
     p1, p2 = len(DNA1), len(DNA2)
     # create 2d array with additional row and column for 0
     cache = [[0 for x in range(p2 + 1)] for x in range(p1 + 1)]
@@ -63,8 +66,25 @@ def dna_match_bottomup(DNA1, DNA2):
             else:
                 cache[i][j] = max(cache[i - 1][j], cache[i][j - 1])
 
-    return cache[p1][p2]
+    # now we want to use the 2d array to find the actual solution instead of the number of matching characters
+    val = cache[p1][p2]
+    solution = [0] * cache[i][j]
+    while val > 0:
+        # start at the end of our array, when letters match, add them to the solution
+        if DNA1[p1-1] == DNA2[p2-1]:
+            solution[val-1] = DNA1[p1-1]
+            p1 -= 1
+            p2 -= 1
+            val -= 1
+        # if the characters don't match then we go back a step in our 2d array
+        # we go back to a cell that shares the same value to find whichever letter caused the previous match
+        elif cache[p1][p2] == cache[p1][p2-1]:
+            p2 -= 1
+        elif cache[p1][p2] == cache[p1-1][p2]:
+            p1 -= 1
+
+    return solution
 
 if __name__ == "__main__":
     print(dna_match_topdown('ATAGTTCCGTCAAA', 'ATAGTTCCGTCAAA'))
-    print(dna_match_bottomup('BAC', 'ABAC'))
+    print(dna_match_bottomup('BACA', 'ABACA'))
