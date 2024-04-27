@@ -6,23 +6,33 @@
 
 def unbound_knapsack(W, n, weights, values):
     """
-    Solves the unbounded knapsack problem in which there are infine amounts of each item.
+    Solves the unbounded knapsack problem in which there are infine amounts of each item. Returns the weights
+    of each item that should be returned.
     :param W: int, the max weight of the sack
     :param n: int, the number of different items to choose from
     :param weights: an array of weight of each item
     :param values: an array of values of each item, index corresponds to weights array
-    :return: the max value that can be fit into the knapsack
+    :return: the weight of each item that should go in the knapsack to optimize the value
     """
     dp = [0]*(W+1)
+    sack = [0] * (W+1)
 
     for x in range(1, W+1):
 
         for i in range(n):
             wi = weights[i]
             if wi <= x:
-                dp[x] = max(dp[x] , dp[x-wi] + values[i])
+                if (dp[x-wi] + values[i]) > dp[x]:
+                    dp[x] = dp[x-wi] + values[i]
+                    sack[x] = wi
 
-    return dp[W]
+    result = ''
+    wj = W
+    while wj > 0 and sack[wj] > 0:
+        result += '+' + str(sack[wj])
+        wj -= sack[wj]
+
+    return result[1:]
 
 # The 0-1 knapsack problem is the same as the unbounded knapsack problem but with the
 # requirement that we place, at most, one object of a kind into the knapsack.
@@ -50,5 +60,5 @@ def bound_knapsack(W, n, weights, values):
 
 
 if __name__ == "__main__":
-    print(unbound_knapsack(10,5,[4,9,3,5,7], [10,25,13,20,8]))
+    print(unbound_knapsack(10,5,[4,9,3,5,7], [10,25,13,16,8]))
     print(bound_knapsack(10, 5, [4, 9, 3, 5, 7], [10, 25, 13, 20, 8]))

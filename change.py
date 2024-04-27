@@ -147,11 +147,11 @@ def makechange_coins(coins, amount):
     # we have a valid count of coins if min_count_table[amount] is valid (assumes no coin below value 1)
     if min_count_table[amount] > amount:
         return -1
-    else:
-        result = ''
-        for x in range(min_count_table[amount]):
-            result += '+' + str(coin_used[amount])
-            amount -= coin_used[amount]
+
+    result = ''
+    for x in range(min_count_table[amount]):
+        result += '+' + str(coin_used[amount])
+        amount -= coin_used[amount]
 
     return result[1:]
 
@@ -160,9 +160,9 @@ def makechange_coins(coins, amount):
 
 
 if __name__ == "__main__":
-    print(makechange_topdown([2,3,5], 1))
-    print(makechange_bottomup([2,3,5], 1))
-    print(makechange_coins([2, 3, 5], 1))
+    print(makechange_topdown([1,5,10,25], 180))
+    print(makechange_bottomup([1,5,10,25], 180))
+    print(makechange_coins([1,5,10,25], 180))
 
 
 
